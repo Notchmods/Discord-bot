@@ -1,0 +1,39 @@
+import discord
+import os
+import random
+from replit import db
+from keep_alive import keep_alive
+
+client = discord.Client();  
+
+@client.event
+async def on_ready():
+   print("We've logged in as {0.user}".format(client)) 
+   await client.get_channel(847833651303022645).send("I am Nathan Chiu your favorite San Francisco math teacher.")
+#command terms
+Greetings = ["Hi","Hello","hello","hi","Salutations","G'day","Hello Nathan Chiu"] 
+
+Randnum = ["Random numbers","randnum","rand num","random numbers","random number","Random number"]
+
+Goodthanks = ["I am good thanks","Good thanks","good thanks","I am good thank you very much","Thanks for asking","thanks for asking"]
+Helpneeded = ["!Help","!help","Help me Nathan Chiu","help me","Help me"]
+
+@client.event
+async def on_message(message):
+  if message.author == client.user: 
+    return
+  msg = message.content
+  if any(word in msg for word in Greetings):
+    await message.channel.send("Hello how can I help you?")
+  if message.content.startswith("How are you?"):
+    await message.channel.send("Good thanks just doing some maths, how are you?")
+  if message.content.startswith("How are you"):
+    await message.channel.send("Good thanks just doing some maths, how are you?")
+  if any(word in msg for word in Goodthanks):
+    await message.channel.send("You need help with maths or anything?")
+  if any(word in msg for word in Helpneeded):
+    await message.channel.send("https://docs.google.com/document/d/e/2PACX-1vTXsrXsUuovt65Iqnjsp_4_iMeyUcuY5Eq6LiTRrbuHsUIdWuY_RKsQbTwXnIuPfD5DabfA0vAQIiWY/pub")
+  if any(word in msg for word in Randnum):
+    await message.channel.send(random.randint(0,1000))
+keep_alive()
+client.run(os.getenv("Token"))
