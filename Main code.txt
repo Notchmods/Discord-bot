@@ -36,4 +36,4 @@ async def on_message(message):
   if any(word in msg for word in Randnum):
     await message.channel.send(random.randint(0,1000))
 keep_alive()
-client.run(os.getenv("Token"))
+client.run("your tokens")
